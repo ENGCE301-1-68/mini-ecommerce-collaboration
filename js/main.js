@@ -34,12 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Search function
+    // Improved Search with trim and validation
     searchInput.addEventListener('keyup', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredProducts = allProducts.filter(product => {
-            return product.name.toLowerCase().includes(searchTerm);
-        });
-        displayProducts(filteredProducts);
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        if (searchTerm === '') {
+            displayProducts(allProducts); // Show all if input is empty
+        } else {
+            const filteredProducts = allProducts.filter(product =>
+                product.name.toLowerCase().includes(searchTerm)
+            );
+            displayProducts(filteredProducts);
+        }
     });
 });
